@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $techs = Technology::all();
+        return view('admin.projects.create', compact('types', 'techs'));
     }
 
     /**
@@ -40,11 +42,14 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $add_ptoject = new Project();
-        $add_ptoject->fill($data);
-        $add_ptoject->save();
+        $add_project = new Project();
+        $add_project->fill($data);
+        $add_project->save();
 
-        return redirect()->route('admin.projects.show', $add_ptoject);
+        if (array_key_exists('techs', $data)) $add_project->technology()->attach($data['techs']);
+
+
+        return redirect()->route('admin.projects.show', $add_project);
     }
 
     /**
@@ -67,7 +72,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('types', 'project'));
+        $techs = Technology::all();
+        return view('admin.projects.edit', compact('types', 'project', 'techs'));
     }
 
     /**
@@ -82,6 +88,8 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $project->update($data);
+        if (array_key_exists('techs', $data)) $project->technology()->sync($data['techs']);
+
 
         return redirect()->route('admin.projects.show', $project);
     }

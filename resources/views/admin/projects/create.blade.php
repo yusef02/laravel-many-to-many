@@ -39,6 +39,15 @@
     </div>
 
     <div class="col-12">
+      @foreach($techs as $tech)
+      <div>
+        <input type="checkbox" name="techs[]" id="tech_{{$tech['technology']}}" value="{{$tech['id']}}">
+        <label for="tech_{{$tech['technology']}}">{{$tech['technology']}}</label>
+      </div>
+      @endforeach
+    </div>
+
+    <div class="col-12">
       <label for="description" class="form-label">Description</label>
       <textarea class="form-control" rows="6" id="description" name="description"></textarea>
     </div>

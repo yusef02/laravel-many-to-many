@@ -10,6 +10,9 @@
       <span><strong>Title: </strong>{{ $project->title }}</span><br>
       <span><strong>Repository: </strong>{{ $project->repository }}</span><br>
       <span><strong>Type: </strong>{{ $project->type?->type }}</span><br>
+      <span><strong>Technology: </strong>
+        {{$project->getTechText()}}
+      </span><br>
       <span><strong>Author: </strong>{{ $project->author }}</span><br>
       <span><strong>Description: </strong></span><br>
       <p>{{ $project->description }}</p><br>

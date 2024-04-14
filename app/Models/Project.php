@@ -28,4 +28,8 @@ class Project extends Model
     {
         return $this->belongsToMany(Technology::class);
     }
+    public function getTechText()
+    {
+        return implode(' - ', $this->technology->pluck('technology')->toArray());
+    }
 }

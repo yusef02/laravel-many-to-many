@@ -13,6 +13,7 @@
         <th>Title</th>
         <th>Repository</th>
         <th>Type</th>
+        <th>Technology</th>
         <th>Create date</th>
         <th>Last update</th>
         <th>Author</th>
@@ -25,6 +26,9 @@
         <td>{{$project['title']}}</td>
         <td>{{$project['repository']}}</td>
         <td>{{$project->type?->type}}</td>
+        <td>
+          {{$project->getTechText()}}
+        </td>
         <td>{{$project['date_create']}}</td>
         <td>{{$project['last_update']}}</td>
         <td>{{$project['author']}}</td>

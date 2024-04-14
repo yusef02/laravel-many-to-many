@@ -15,6 +15,23 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
+            $table->enum('technology', [
+                'git',
+                'HTML',
+                'Java Script',
+                'CSS',
+                'Java',
+                'PHP',
+                'SQL',
+                'Rust',
+                'Python',
+                'Ruby',
+                'C',
+                'C#',
+                'C++',
+                'Swift',
+                'Go'
+            ]);
             $table->timestamps();
         });
     }

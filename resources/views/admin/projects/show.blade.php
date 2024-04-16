@@ -18,6 +18,9 @@
       <p>{{ $project->description }}</p><br>
       <span><strong>Created ad: </strong>{{ $project->date_create }}</span><br>
       <span><strong>Last update: </strong>{{ $project->last_update }}</span><br>
+      @if(!empty($project->image_path))
+      <img src="{{ asset('storage/' . $project->image_path) }}" class="img-fluid my-3">
+      @endif
     </div>
   </div>
   <a href="{{ route('admin.projects.index') }}">back to index projects</a> |

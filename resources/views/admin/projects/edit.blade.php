@@ -59,6 +59,9 @@
     <div class="col-4">
       <label for="image" class="form-label">Cover</label>
       <input type="file" name="image" id="image" class="form-control">
+      @if(!empty($project->image_path))
+      <img src="{{ asset('storage/' . $project->image_path) }}" class="img-fluid my-3">
+      @endif
     </div>
 
 

@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -44,6 +45,10 @@ class ProjectController extends Controller
         $data = $request->all();
         $add_project = new Project();
         $add_project->fill($data);
+        if (array_key_exists('image', $data)) {
+            $image_path = Storage::disk('public')->put('uploads/projects', $data['image']);
+            $add_project->image_path = $image_path;
+        }
         $add_project->save();
 
         if (array_key_exists('techs', $data)) $add_project->technology()->attach($data['techs']);
@@ -88,6 +93,12 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $project->update($data);
+        if (array_key_exists('image', $data)) {
+            if (!empty($project->image_path)) Storage::delete($project->image_path);
+            $image_path = Storage::disk('public')->put('uploads/projects', $data['image']);
+            $project->image_path = $image_path;
+        }
+        $project->save();
         if (array_key_exists('techs', $data)) $project->technology()->sync($data['techs']);
 
 

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container py-5">
-  <form action="{{ route('admin.projects.store') }}" method="POST" class="row g-3">
+  <form action="{{ route('admin.projects.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
 
     @csrf
 
